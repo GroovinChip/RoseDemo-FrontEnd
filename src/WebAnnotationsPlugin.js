@@ -1,17 +1,17 @@
 import React from "react";
 import isEqual from 'lodash/isEqual';
 import mirador from 'mirador/dist/es/src/index';
-import Modal from 'react-bootstrap/Modal'
-import Button from 'react-bootstrap/Button';
+import Button from '@material-ui/core/Button';
+import Dialog from '@material-ui/core/Dialog';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogTitle from '@material-ui/core/DialogTitle';
 
 // This component represents the entire custom Mirador plugin
 class WebAnnotationsTranscriptionPopupButton extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { body: '' };
+    this.state = { body: '', open: false };
     this.fetchAnnotations = this.fetchAnnotations.bind(this);
-    // this.show = false;
-    // this.handleClose = this.handleClose.bind(this);
   }
 
   // This function loops through all the canvases and contructs and calls a new URL
@@ -62,12 +62,9 @@ class WebAnnotationsTranscriptionPopupButton extends React.Component {
     });
   }
 
-  //
-  // handleClose () {
-  //   this.setState({
-  //     show: false
-  //   });
-  // }
+  openDialog() {
+    this.setState({ open: true });
+  }
 
   componentDidMount() {
     const { canvases } = this.props;
@@ -87,22 +84,18 @@ class WebAnnotationsTranscriptionPopupButton extends React.Component {
   // Turn the Web Annotation's transcription into viewable HTML
   render() {
     return (
-      <div Style={"margin-right: 116px; margin-left: 16px;"}  dangerouslySetInnerHTML={{__html: this.state.body}} />
-        // <>
-        //   <Modal show={this.show} onHide={this.handleClose}>
-        //     <Modal.Header closeButton>
-        //       <Modal.Title>Web Annotations</Modal.Title>
-        //     </Modal.Header>
-        //     <Modal.body>
-        //       {this.state.body}
-        //     </Modal.body>
-        //     <Modal.Footer>
-        //       <Button variant="secondary" onClick={this.handleClose}>
-        //         Close
-        //       </Button>          
-        //     </Modal.Footer>
-        //   </Modal>
-        // </>
+      <React.Fragment>
+        <Button onClick={this.openDialog.bind(this)}>Open dialog</Button>
+          <Dialog open={this.state.open} onEnter={console.log('Hey.')}>
+          <DialogTitle>Hello CodeSandbox</DialogTitle>
+          <DialogContent>Start editing to see some magic happen!</DialogContent>
+        </Dialog>
+      </React.Fragment>
+      // <div>
+      //   <iframe src='https://mirador_plugin.codemagic.app/#/' Style={"border: 0;"}></iframe>
+      // </div>
+      //<div Style={"margin-right: 116px; margin-left: 16px;"}  dangerouslySetInnerHTML={{__html: this.state.body}} />
+        
     );
   }
 } 
