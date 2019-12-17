@@ -12,6 +12,7 @@ import Typography from '@material-ui/core/Typography'
 import Box from '@material-ui/core/Box'
 import Divider from '@material-ui/core/Divider'
 
+// Define styles for components
 const styles = theme => ({
   root: {
     margin: 0,
@@ -25,6 +26,8 @@ const styles = theme => ({
   }
 })
 
+// This component represents the title of the Dialog
+// that will show Web Annotation data
 const DialogTitle = withStyles(styles)(props => {
   const { children, classes, onClose, ...other } = props
   return (
@@ -39,6 +42,8 @@ const DialogTitle = withStyles(styles)(props => {
   )
 })
 
+// This component represents the content of the Dialog
+// that will show Web Annotation data
 const DialogContent = withStyles(theme => ({
   root: {
     padding: theme.spacing(2)
@@ -59,7 +64,8 @@ class WebAnnotationsTranscriptionPopupButton extends React.Component {
     this.fetchAnnotations = this.fetchAnnotations.bind(this)
   }
 
-  //
+  // Call Homer Web Annotation endpoint from Eldarion
+  // and store some data in the plugin state
   fetchAnnotations (canvases) {
     fetch(
       'https://explorehomer-atlas-dev3.herokuapp.com/wa/urn:cite2:hmt:msA.v1:12r/translation-alignment/0/text/',
@@ -81,10 +87,12 @@ class WebAnnotationsTranscriptionPopupButton extends React.Component {
     })
   }
 
+  // This function opens the Dialog
   openDialog () {
     this.setState({ open: true })
   }
 
+  // This function closes the Dialog
   closeDialog () {
     this.setState({ open: false })
   }
@@ -108,7 +116,7 @@ class WebAnnotationsTranscriptionPopupButton extends React.Component {
     }
   }
 
-  //
+  // Render the actual Dialog
   render () {
     return (
       <div>
