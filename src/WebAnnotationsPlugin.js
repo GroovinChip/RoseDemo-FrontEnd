@@ -11,6 +11,7 @@ import CloseIcon from '@material-ui/icons/Close'
 import Typography from '@material-ui/core/Typography'
 import Box from '@material-ui/core/Box'
 import Divider from '@material-ui/core/Divider'
+import ReactHtmlParser, { processNodes, convertNodeToElement, htmlparser2 } from 'react-html-parser'
 
 // Define styles for components
 const styles = theme => ({
@@ -57,8 +58,8 @@ class WebAnnotationsTranscriptionPopupButton extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
-      text1: '',
-      text2: '',
+      language: '',
+      translation: '',
       open: false
     }
     this.fetchAnnotations = this.fetchAnnotations.bind(this)
@@ -68,7 +69,7 @@ class WebAnnotationsTranscriptionPopupButton extends React.Component {
   // and store some data in the plugin state
   fetchAnnotations (canvases) {
     fetch(
-      'https://explorehomer-atlas-dev3.herokuapp.com/wa/urn:cite2:hmt:msA.v1:12r/translation-alignment/0/text/',
+      'https://explorehomer-atlas-dev3.herokuapp.com/wa/urn:cite2:hmt:msA.v1:12r/translation-alignment/collection/html/0/',
       {
         method: 'GET',
         headers: {
@@ -79,8 +80,8 @@ class WebAnnotationsTranscriptionPopupButton extends React.Component {
       if (response.ok) {
         response.json().then(json => {
           this.setState({
-            text1: json.body[0].value,
-            text2: json.body[1].value
+            language: json.items[0].body[0].value,
+            translation: json.items[1].body[0].value
           })
         })
       }
@@ -124,9 +125,9 @@ class WebAnnotationsTranscriptionPopupButton extends React.Component {
         <Dialog open={this.state.open} onClose={this.closeDialog.bind(this)}>
           <DialogTitle id="customized-dialog-title" onClose={this.closeDialog.bind(this)}>Web Annotations</DialogTitle>
           <DialogContent>
-            <Box>{this.state.text1}</Box>
+            <Box>{ReactHtmlParser(this.state.language)}</Box>
             <Divider />
-            <Box>{this.state.text2}</Box>
+            <Box>{ReactHtmlParser(this.state.translation)}</Box>
           </DialogContent>
         </Dialog>
       </div>
