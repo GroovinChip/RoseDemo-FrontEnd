@@ -81,7 +81,7 @@ class WebAnnotationsTranscriptionPopupButton extends React.Component {
         response.json().then(json => {
           this.setState({
             language: json.items[0].body[0].value,
-            translation: json.items[1].body[0].value
+            translation: json.items[0].body[1].value
           })
         })
       }
