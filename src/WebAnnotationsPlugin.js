@@ -30,14 +30,12 @@ class WebAnnotationsPlugin extends React.Component {
         var url;
         // Check if the endpoint for the current canvas is a iiif or iiif3 endpoint
         if (iiifUrl.includes('iiif3')) {
-          console.log('This is a iiif3 endpoint');
           try {
             url = new URL(canvas.id.replace('iiif3', 'wa'));
           } catch (e) {
             console.log(e);
           }
         } else {
-          console.log('This is a iiif endpoint');
           try {
             url = new URL(canvas.id.replace('iiif', 'wa'));
           } catch (e) {
