@@ -2,12 +2,6 @@ import React from 'react'
 import isEqual from 'lodash/isEqual'
 import { getVisibleCanvases } from 'mirador/dist/es/src/state/selectors/canvases'
 import { receiveAnnotation } from 'mirador/dist/es/src/state/actions/annotation'
-import { withStyles } from '@material-ui/core/styles'
-import MuiDialogTitle from '@material-ui/core/DialogTitle'
-import MuiDialogContent from '@material-ui/core/DialogContent'
-import IconButton from '@material-ui/core/IconButton'
-import CloseIcon from '@material-ui/icons/Close'
-import Typography from '@material-ui/core/Typography'
 
 // This component represents the entire custom Mirador plugin
 class WebAnnotationsPlugin extends React.Component {
