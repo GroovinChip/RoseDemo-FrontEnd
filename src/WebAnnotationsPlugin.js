@@ -40,7 +40,8 @@ class WebAnnotationsPlugin extends React.Component {
         fetch(url, {
           method: 'GET',
         }).then(res => res.json())
-          .then((results) => { 
+          .then((results) => {
+            // Create Annotation Page object
             const AnnoPage = {
               id: url,
               type: 'AnnotationPage',
@@ -48,7 +49,8 @@ class WebAnnotationsPlugin extends React.Component {
                 results,
               ],
             }
-            receiveAnnotation(canvas.id, url, AnnoPage) // results should be annotation page
+            // Provide Annotation Page to Mirador
+            receiveAnnotation(canvas.id, url, AnnoPage)
         }, (error) => {
           console.log(error);
         });
@@ -56,11 +58,13 @@ class WebAnnotationsPlugin extends React.Component {
     });
   }
 
+  // Called when plugin is loaded. Get canvases from Mirador props and call fetchAnnotations.
   componentDidMount() {
     const { canvases } = this.props;
     this.fetchAnnotations(canvases);
   }
 
+  // Called on plugin reload. Get correct canvas from Mirador on canvas navigation
   componentDidUpdate(prevProps) {
     const { canvases } = this.props;
     const currentCanvasIds = canvases.map(canvas => canvas.id);
@@ -71,7 +75,7 @@ class WebAnnotationsPlugin extends React.Component {
     }
   }
 
-  // 
+  // Render the target component
   render() {
     return (
       <this.props.TargetComponent {...this.props.targetProps}></this.props.TargetComponent>
