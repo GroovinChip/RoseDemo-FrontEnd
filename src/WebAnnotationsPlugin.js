@@ -91,7 +91,7 @@ function mapStateToProps(state, props) {
   };
 };
 
-// Add annotations to Mirador state
+// Get access to the function that Mirador provides for putting annotations into Mirador's state
 const mapDispatchToProps = {
   receiveAnnotation: receiveAnnotation
 }
