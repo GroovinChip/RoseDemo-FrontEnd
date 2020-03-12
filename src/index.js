@@ -1,7 +1,8 @@
 import ReactDOM from "react-dom";
 import React from "react";
 import Mirador from "./Mirador";
-import plugin from "./WebAnnotationsPlugin";
+import WebAnnotationsPlugin from "./WebAnnotationsPlugin";
+import HighlightClickAnnotationsPlugin from "./ExternalAnnotationsPlugin";
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 ReactDOM.render(
@@ -12,7 +13,10 @@ ReactDOM.render(
         canvasId: 'https://rosetest.library.jhu.edu/rosademo/iiif3/rose/SeldenSupra57/1r/canvas',
         thumbnailNavigationPosition: 'far-bottom'
       },
-    ] ,
+    ],
+    window: {
+      defaultSidebarPanelWidth: 400,
+    },
     manifests: {
       'https://rosetest.library.jhu.edu/rosademo/iiif/rose/CoxMacro/manifest': {},
       'https://rosetest.library.jhu.edu/rosademo/iiif/rose/Douce195/manifest': {},
@@ -48,6 +52,6 @@ ReactDOM.render(
      }  
     },
     // selectedTheme: 'dark',
-    }} plugins={[plugin]} />,
+    }} plugins={[WebAnnotationsPlugin, HighlightClickAnnotationsPlugin]} />,
   document.getElementById("root")
 );
