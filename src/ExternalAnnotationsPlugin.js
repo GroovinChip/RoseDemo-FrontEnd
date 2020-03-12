@@ -34,6 +34,11 @@ class HighlightClickAnnotationsPlugin extends React.Component {
     
   }
 
+  // Do something when an annotation is highlighted
+  handleAnnotationHighlight(canvases) {
+    
+  }
+
   // Render target component
   render() {
     return (
